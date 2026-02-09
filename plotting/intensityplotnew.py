@@ -3,57 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 files = [
-    # "rscan-2-ez-001133.50.h5",
-    # "rscan-2-ez-001133.66.h5",
-    # "rscan-2-ez-001133.81.h5",
-    # "rscan-2-ez-001133.97.h5",
-    # "rscan-2-ez-001134.12.h5",
-    # "rscan-2-ez-001134.28.h5",
-    # "rscan-2-ez-001134.44.h5",
-    # "rscan-2-ez-001134.59.h5",
-    # "rscan-2-ez-001134.75.h5",
-    # "rscan-2-ez-001134.91.h5",
-    # "rscan-2-ez-001135.06.h5",
-    # "rscan-2-ez-001135.22.h5",
-    # "rscan-2-ez-001135.38.h5",
-    # "rscan-2-ez-001135.53.h5",
-    # "rscan-2-ez-001135.69.h5",
-    # "rscan-2-ez-001135.84.h5",
-    # "rscan-2-ez-001136.00.h5",
-    # "rscan-2-ez-001136.16.h5",
-    # "rscan-2-ez-001136.31.h5",
-    # "rscan-2-ez-001136.47.h5",
-    # "rscan-2-ez-001136.62.h5",
-    # "rscan-2-ez-001136.78.h5",
-    # "rscan-2-ez-001136.94.h5",
-    # "rscan-2-ez-001137.09.h5",
-    # "rscan-2-ez-001137.25.h5",
-    # "rscan-2-ez-001137.41.h5",
-    # "rscan-2-ez-001137.56.h5",
-    # "rscan-2-ez-001137.72.h5",
-    # "rscan-2-ez-001137.88.h5",
-    # "rscan-2-ez-001138.03.h5",
-    # "rscan-2-ez-001138.19.h5",
-    # "rscan-2-ez-001138.34.h5",
-    # "rscan-2-ez-001138.50.h5"
-
-
-    # "rscan-2-ez-001133.81.h5",
-    # "rscan-2-ez-001134.12.h5",
-    "rscan-2-ez-001134.44.h5", # !!!
-    # "rscan-2-ez-001134.75.h5",
-    # "rscan-2-ez-001135.06.h5",
-    # "rscan-2-ez-001135.38.h5",
-    # "rscan-2-ez-001135.69.h5",
-    # "rscan-2-ez-001136.00.h5",
-    # "rscan-2-ez-001136.31.h5",
-    # "rscan-2-ez-001136.62.h5",
-    # "rscan-2-ez-001136.94.h5",
-    # "rscan-2-ez-001137.25.h5",
-    # "rscan-2-ez-001137.56.h5",
-    # "rscan-2-ez-001137.88.h5",
-    # "rscan-2-ez-001138.19.h5",
-    # "rscan-2-ez-001138.50.h5"
+    "rscan-2-ez-001134.44.h5"
 ]
 
 # def plot(fn):
@@ -96,7 +46,7 @@ files = [
 from scipy.signal import find_peaks
 
 def plot(fn, peak_distance=12, prominence=None, height=None, width=None):
-    fn = "/Users/maggieshi/Desktop/SachinUROP/Plots/" + fn
+    fn = "~/data/" + fn
     with h5py.File(fn, "r") as f:
         ez = f["/ez"][()]   # shape ~ (Z, Y, X)
 

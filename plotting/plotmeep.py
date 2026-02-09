@@ -9,8 +9,8 @@ DEFECT_FREQ_LO, DEFECT_FREQ_HI = 0.34, 0.35
 MAX_FLATNESS_STD = 0.01
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-DATA_PATH = SCRIPT_DIR / 'data.dat'
-OUTPUT_PATH = SCRIPT_DIR / 'band_structure_plot.pdf'
+DATA_PATH = SCRIPT_DIR / 'data/data.dat'
+OUTPUT_PATH = SCRIPT_DIR / 'data/band_structure_plot.pdf'
 
 # Read the data file, skipping the header row
 # Each row starts with "freqs:" so we need to skip that first column

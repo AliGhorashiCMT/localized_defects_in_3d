@@ -2,7 +2,7 @@ import h5py
 import numpy as np
 import matplotlib.pyplot as plt
 
-h5_file = "/Users/maggieshi/Desktop/rscan-2-ez-001134.28.h5"
+h5_file = "~/data/rscan-2-ez-001134.28.h5"
 dataset_name = "ez"
 z_index = 200  # Change this to select a different z slice
 
@@ -16,5 +16,5 @@ plt.colorbar(label='Value')
 plt.title(f'2D Colormap of {dataset_name} at z={z_index}')
 plt.xlabel('X')
 plt.ylabel('Y')
-plt.savefig("fieldplot.pdf", format="pdf")
+plt.savefig("~/data/fieldplot.pdf", format="pdf")
 plt.show()

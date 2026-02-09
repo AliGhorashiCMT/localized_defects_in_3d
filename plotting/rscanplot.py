@@ -6,12 +6,7 @@ import numpy as np
 from matplotlib.colors import Normalize
 
 # Path to the CSV file
-# path = '/Users/maggieshi/Desktop/SachinUROP/Plots/paper.csv'
-# path2 = '/Users/maggieshi/Desktop/SachinUROP/Plots/paper1.csv'
-# path = '/Users/maggieshi/Desktop/SachinUROP/Plots/eps11-1.csv'
-# path2 = '/Users/maggieshi/Desktop/SachinUROP/Plots/eps11-2.csv'
-# path3 = '/Users/maggieshi/Desktop/SachinUROP/Plots/eps11-3.csv'
-path = '/Users/maggieshi/Desktop/SachinUROP/Plots/eps11-rand.csv'
+path = '~/data/eps11-rand.csv'
 
 # Indices of columns to remove
 indices_to_remove = {0, 2, 4, 5, 6}
