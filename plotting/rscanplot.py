@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 import csv
 import math
@@ -5,8 +6,8 @@ from collections import defaultdict
 import numpy as np
 from matplotlib.colors import Normalize
 
-# Path to the CSV file
-path = '~/data/eps11-rand.csv'
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+path = os.path.join(SCRIPT_DIR, "data", "eps11-rand.csv")
 
 # Indices of columns to remove
 indices_to_remove = {0, 2, 4, 5, 6}

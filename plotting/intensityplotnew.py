@@ -1,6 +1,10 @@
+import os
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, "data")
 
 files = [
     "rscan-2-ez-001134.44.h5"
@@ -46,7 +50,7 @@ files = [
 from scipy.signal import find_peaks
 
 def plot(fn, peak_distance=12, prominence=None, height=None, width=None):
-    fn = "~/data/" + fn
+    fn = os.path.join(DATA_DIR, fn)
     with h5py.File(fn, "r") as f:
         ez = f["/ez"][()]   # shape ~ (Z, Y, X)
 
