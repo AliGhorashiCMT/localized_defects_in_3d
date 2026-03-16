@@ -64,6 +64,8 @@ plt.plot(x_linfit, y_linfit, color='green', linewidth=3, label=f'Best Fit Line (
 plt.xlabel('R (System Size)')
 plt.ylabel('Q (Quality Factor)')
 # plt.legend()
+plt.xlim(5, 25)
+plt.ylim(2, 5)
 plt.title('Fitted Curve for Q(R)')
 plt.savefig("nonlinear.pdf", format="pdf")
 plt.show()
