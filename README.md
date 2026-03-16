@@ -11,4 +11,4 @@
 
 **./plot_unit_cell.m:** plots the unit cell in matlab and saves the resulting image as a high resolution pdf.  
 
-**./symeigs.ipynb:** Computs the symmetry eigenvalues using the data created in the folder **./symeigs/**. 
+**./symeigs.ipynb:** Computes the symmetry eigenvalues of the bulk structure using the data created in the folder **./symeigs/**. The result of this code is used in **Figure 1** of the paper.  
