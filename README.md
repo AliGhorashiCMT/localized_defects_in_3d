@@ -16,4 +16,5 @@
 **./defect_scan.ipynb**: Calculates the bands of the supercell structure as the defect size is tuned. In particular, it finds the parameter range at which a degeneracy is obtained between the singly degenerate defect band and the three-fold degenerate bulk band at the **R** point. 
 
 **space_group_sweep_revised.ipynb**: Filtering of space groups for **Figure 4**. 
-  - For an edge case that is not covered in the filtering above, see: https://hackmd.io/@aligho/B1_cX7bq-e 
+  - For an edge case that is not covered in the filtering above, see: https://hackmd.io/@aligho/B1_cX7bq-e
+    -   A pdf of this is in **./pdfs_of_notes/**
