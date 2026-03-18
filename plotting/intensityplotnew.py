@@ -130,8 +130,10 @@ def plot(fn, peak_distance=12, prominence=None, height=None, width=None):
         plt.plot(xR, m2 * xR + b2, 'r:', lw=1.6, label="right fit (peaks)")
 
     # plt.legend(loc="best")
-#    plt.xlim(-144, 144)
-#    plt.xticks([-144, 0, 144], [-144/16, 0, 144/16]) 	
+    plt.ylim(-8, 0)
+    plt.vlines([128, -128], -8, 0)
+    plt.xlim(-144, 144)
+    plt.xticks([-144, 0, 144], [-144/16, 0, 144/16]) 	
     plt.savefig("intensityplotnew.pdf", format="pdf")
     plt.show()
 
