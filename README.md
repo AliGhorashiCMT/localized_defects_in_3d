@@ -1,7 +1,7 @@
 ## localized_defects_in_3d
-**fieldplot.py:** plots the colormap of $E_z$
+**fieldplot.py:** plots the colormap of $E_z$. Note that the loaded dataset is $400\times\400\times400$. With a resolution of $16$, this corresponds to ranges in each Cartesian coordinate of $-12.5$ to $12.5$
 
-**intensityplot.py:** plots the 2d slice of $E_z$
+**intensityplot.py:** plots the 2d slice of $E_z$. The loaded dataset is $496\times\496\times496$, corresponding to a $31\times31\times31$ supercell. 
 
 **plotmeep.py:** plots MEEP band structure
 
