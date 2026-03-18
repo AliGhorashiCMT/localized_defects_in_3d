@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # Plot and defect-band constants
-FIG_WIDTH, FIG_HEIGHT = 8, 12
+cm = 1/2.54
+FIG_WIDTH, FIG_HEIGHT = 5*cm, 7.5*cm
 Y_MIN, Y_MAX = 0.33, 0.36
 DEFECT_FREQ_LO, DEFECT_FREQ_HI = 0.34, 0.35
 MAX_FLATNESS_STD = 0.01
@@ -33,8 +34,8 @@ plt.figure(figsize=(FIG_WIDTH, FIG_HEIGHT))
 
 # Plot each band with thin lines first
 for i in range(y_data.shape[1]):
-    plt.plot(x_data, y_data[:, i], color='gray', marker='o', markersize=3, linewidth=0.8, alpha=0.6)
-
+    #plt.plot(x_data, y_data[:, i], color='gray', marker='o', markersize=3, linewidth=0.8, alpha=0.6)
+    plt.plot(x_data, y_data[:, i], color='gray', linewidth=0.8, alpha=0.6)
 # Identify the flat defect mode using the band-tracked data
 # Look for bands that are relatively flat and around 0.345
 defect_band_idx = None
@@ -106,6 +107,8 @@ plt.grid(False)
 
 # Save the plot with explicit dimensions (width, height in inches)
 fig = plt.gcf()
+plt.xlim(1, 13)
+plt.xticks([1, 7, 13])
 fig.set_size_inches(FIG_WIDTH, FIG_HEIGHT)
 plt.savefig(OUTPUT_PATH, dpi=300, bbox_inches='tight')
 plt.show()

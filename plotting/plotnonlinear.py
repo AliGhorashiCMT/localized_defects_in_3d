@@ -25,7 +25,7 @@ y2_fit_orig = exp_taper(x2_fit, *popt)
 # Log-transform the fit for plotting
 y2_fit = y2_fit_orig
 
-plt.plot(x2_fit, y2_fit, 'g--', color='purple')
+plt.plot(x2_fit, y2_fit, color='purple')
 
 coeffs = np.polyfit(x, ylin, 1)
 m, b = coeffs
@@ -33,12 +33,14 @@ x_linfit = np.linspace(min(x), max(x), 100)
 y_linfit = m * x_linfit + b
 
 plt.scatter(x, ylin, color='green', label='Optimal r_defect')
-plt.plot(x_linfit, y_linfit, 'r--', color='green')
-plt.scatter(x2, y2, color='purple', label='Detuned r_defect')  # Added line
+plt.plot(x_linfit, y_linfit, color='green')
+plt.scatter(x2, y2, color='purple')  # Added line
 
 plt.xlabel('System Size')
 plt.ylabel('Log(Q)')
 plt.title('Linear Fit to Data')
 plt.legend()
 plt.show()
+plt.xlim(7, 17)
+plt.ylim(2.5, 4.5)
 plt.savefig("linear.pdf", format="pdf")

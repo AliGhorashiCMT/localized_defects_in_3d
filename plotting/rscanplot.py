@@ -139,11 +139,16 @@ norm = Normalize(vmin=min(avg_qs), vmax=math.log10(10**5))
 # plt.title('Scatter plot of raw data')
 # plt.show()
 
+print("data corresponding to heatmap:", np.array(avg_qs).round(3))
+
 plt.scatter(avg_radii, avg_freqs, c=avg_qs, cmap='hot', s=60, norm=norm)
 plt.colorbar(label='Log(Q)')
+print("Color limits: ", plt.gci().get_clim())
 plt.xlabel('Radii')
 plt.ylabel('Frequency')
 plt.title('Scatter plot of average data')
+plt.xlim(0.68, 0.86)
+plt.ylim(0.3, 0.38)
 plt.savefig("rscanplot.pdf", format="pdf")
 plt.show()
 
