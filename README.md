@@ -1,13 +1,14 @@
 ## localized_defects_in_3d
-**fieldplot.py:** plots the colormap of $E_z$. Note that the loaded dataset is $400\times 400\times 400$. With a resolution of $16$, this corresponds to ranges in each Cartesian coordinate of $-12.5$ to $12.5$
+**./plotting/fieldplot.py:** plots the colormap of $E_z$. Note that the loaded dataset is $400\times 400\times 400$. With a resolution of $16$, this corresponds to ranges in each Cartesian coordinate of $-12.5$ to $12.5$
 
-**intensityplot.py:** plots the 2d slice of $E_z$. The loaded dataset is $496\times 496\times496$, corresponding to a $31\times31\times31$ supercell. 
+**./plotting/intensityplot.py:** plots the 2d slice of $E_z$. The loaded dataset is $496\times 496\times496$, corresponding to a $31\times31\times31$ supercell. 
 
-**plotmeep.py:** plots MEEP band structure
+**./plotting/plotmeep.py:** plots MEEP band structure
+  - **./plotting/new_fig2a_data.ipynb**: Plots latest band structure data (the data file used by this notebook is available in the subdirectory, **./data**). 
 
-**plotnonlinear.py:** plots the linear and nonlinear scaling of Q with system size
+**./plotting/plotnonlinear.py:** plots the linear and nonlinear scaling of Q with system size
 
-**rscanplot.py:** plots the scan of defect radius
+**./plotting/rscanplot.py:** plots the scan of defect radius
 
 **./plot_unit_cell.m:** plots the unit cell in matlab and saves the resulting image as a high resolution pdf.  
 
