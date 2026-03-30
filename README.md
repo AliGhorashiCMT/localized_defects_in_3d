@@ -19,3 +19,4 @@
 **space_group_sweep_revised.ipynb**: Filtering of space groups for **Figure 4**. 
   - For an edge case that is not covered in the filtering above, see: https://hackmd.io/@aligho/B1_cX7bq-e
     -   A pdf of this is in **./pdfs_of_notes/**
+  - To see how space group 166 may be written as a subgroup of space group 227, see: https://hackmd.io/@aligho/ryO1VHDiWx
