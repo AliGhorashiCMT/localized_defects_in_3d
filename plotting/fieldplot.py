@@ -8,7 +8,7 @@ h5_file = os.path.join(SCRIPT_DIR, "data", "rscan-2-ez-001134.28.h5")
 dataset_name = "ez"
 z_index = 200  # Change this to select a different z slice
 
-with h5py.File(h5_file, 'r') as f:
+with h5py.File(h5_file, 'r', locking=False) as f:
     data = f[dataset_name][:]
     xy_slice = data[:, z_index, :]  # Slicing at z_index
 

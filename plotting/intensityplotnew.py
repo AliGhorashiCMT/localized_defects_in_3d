@@ -100,7 +100,13 @@ def plot(fn, peak_distance=12, prominence=None, height=None, width=None, loglog=
 
     # fit slope: amp ~ exp(m*x)            if loglog=False  -> m is exponential decay rate (1/length)
     #            amp ~ |x|^m               if loglog=True   -> m is power-law exponent
+    # For the "last 4 peaks" fit: left outer peaks = pL[:4] (most negative x = rightmost on log-log),
+    # right outer peaks = pR[-4:] (largest x = rightmost on log-log)
+    pL_outer = pL[:4] if pL.size >= 4 else pL
+    pR_outer = pR[-4:] if pR.size >= 4 else pR
+
     fits = {}
+    fits_outer = {}
     if pL.size >= 2:
         m1, b1 = np.polyfit(xL_fit[pL], yL[pL], 1); fits['left'] = (m1, b1)
     elif xL.size >= 2:
@@ -109,12 +115,20 @@ def plot(fn, peak_distance=12, prominence=None, height=None, width=None, loglog=
         m2, b2 = np.polyfit(xR_fit[pR], yR[pR], 1); fits['right'] = (m2, b2)
     elif xR.size >= 2:
         m2, b2 = np.polyfit(xR_fit, yR, 1);          fits['right'] = (m2, b2)
+    if pL_outer.size >= 2:
+        m1o, b1o = np.polyfit(xL_fit[pL_outer], yL[pL_outer], 1); fits_outer['left'] = (m1o, b1o)
+    if pR_outer.size >= 2:
+        m2o, b2o = np.polyfit(xR_fit[pR_outer], yR[pR_outer], 1); fits_outer['right'] = (m2o, b2o)
 
     slope_label = "power-law exponent" if loglog else "exp decay rate (per unit x)"
     if 'left' in fits:
-        print(f"left  {slope_label}: {fits['left'][0]:.4f}")
+        print(f"left  {slope_label} (all peaks):    {fits['left'][0]:.4f}")
+    if 'left' in fits_outer:
+        print(f"left  {slope_label} (outer 4 peaks): {fits_outer['left'][0]:.4f}")
     if 'right' in fits:
-        print(f"right {slope_label}: {fits['right'][0]:.4f}")
+        print(f"right {slope_label} (all peaks):    {fits['right'][0]:.4f}")
+    if 'right' in fits_outer:
+        print(f"right {slope_label} (outer 4 peaks): {fits_outer['right'][0]:.4f}")
 
     # --- plot ---
     # plot in real units (|amp|, and |x| for log-log) so matplotlib's axis scales do the log
@@ -131,11 +145,19 @@ def plot(fn, peak_distance=12, prominence=None, height=None, width=None, loglog=
         if 'left' in fits:
             m1, b1 = fits['left']
             ax.plot(np.abs(xL), np.exp(m1 * xL_fit + b1), 'r:', lw=1.6,
-                    label=f"left fit: slope={m1:.3f}")
+                    label=f"left fit (all): slope={m1:.3f}")
         if 'right' in fits:
             m2, b2 = fits['right']
             ax.plot(xR, np.exp(m2 * xR_fit + b2), 'r:', lw=1.6,
-                    label=f"right fit: slope={m2:.3f}")
+                    label=f"right fit (all): slope={m2:.3f}")
+        if 'left' in fits_outer:
+            m1o, b1o = fits_outer['left']
+            ax.plot(np.abs(xL), np.exp(m1o * xL_fit + b1o), 'm--', lw=1.6,
+                    label=f"left fit (outer 4): slope={m1o:.3f}")
+        if 'right' in fits_outer:
+            m2o, b2o = fits_outer['right']
+            ax.plot(xR, np.exp(m2o * xR_fit + b2o), 'm--', lw=1.6,
+                    label=f"right fit (outer 4): slope={m2o:.3f}")
         ax.set_xlabel("|Position| (relative to center)")
         out_pdf = "intensityplotnew_loglog.pdf"
     else:
@@ -145,11 +167,19 @@ def plot(fn, peak_distance=12, prominence=None, height=None, width=None, loglog=
         if 'left' in fits:
             m1, b1 = fits['left']
             ax.plot(xL, np.exp(m1 * xL + b1), 'r:', lw=1.6,
-                    label=f"left fit: slope={m1:.4f}")
+                    label=f"left fit (all): slope={m1:.4f}")
         if 'right' in fits:
             m2, b2 = fits['right']
             ax.plot(xR, np.exp(m2 * xR + b2), 'r:', lw=1.6,
-                    label=f"right fit: slope={m2:.4f}")
+                    label=f"right fit (all): slope={m2:.4f}")
+        if 'left' in fits_outer:
+            m1o, b1o = fits_outer['left']
+            ax.plot(xL, np.exp(m1o * xL + b1o), 'm--', lw=1.6,
+                    label=f"left fit (outer 4): slope={m1o:.4f}")
+        if 'right' in fits_outer:
+            m2o, b2o = fits_outer['right']
+            ax.plot(xR, np.exp(m2o * xR + b2o), 'm--', lw=1.6,
+                    label=f"right fit (outer 4): slope={m2o:.4f}")
         ax.set_xlabel("Position (relative to center)")
         out_pdf = "intensityplotnew.pdf"
 
