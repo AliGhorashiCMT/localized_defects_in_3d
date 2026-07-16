@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, "data")
 
+resolution = 16
 files = [
     "rscan-2-ez-001134.44.h5"
 ]
@@ -60,6 +61,7 @@ def plot(fn, peak_distance=12, prominence=None, height=None, width=None, loglog=
         z0 = dset.shape[0] // 2
         y0 = dset.shape[1] // 2
         x0 = dset.shape[2] // 2
+        print("Dataset shape: ", dset.shape)
         # take a line cut (choose axis by uncommenting the one you want)
         # line = np.abs(dset[z0, y0, :])
         line = np.abs(dset[:, y0, x0])
@@ -138,52 +140,53 @@ def plot(fn, peak_distance=12, prominence=None, height=None, width=None, loglog=
     if loglog:
         ax.set_xscale('log')
         # split sides because x must be positive on a log axis
-        ax.plot(np.abs(xL), np.exp(yL), color="blue", label="data (left)")
-        ax.plot(xR,         np.exp(yR), color="blue", label="data (right)")
-        if pL.size: ax.plot(np.abs(xL[pL]), np.exp(yL[pL]), 'ro', ms=6, label="left peaks")
-        if pR.size: ax.plot(xR[pR],         np.exp(yR[pR]), 'ro', ms=6, label="right peaks")
+        ax.plot(np.abs(xL)/resolution, np.exp(yL), color="blue", label="data (left)")
+        ax.plot(xR/resolution, np.exp(yR), color="blue", label="data (right)")
+        if pL.size: ax.plot(np.abs(xL[pL])/resolution, np.exp(yL[pL]), 'ro', ms=6, label="left peaks")
+        if pR.size: ax.plot(xR[pR]/resolution,         np.exp(yR[pR]), 'ro', ms=6, label="right peaks")
         if 'left' in fits:
             m1, b1 = fits['left']
-            ax.plot(np.abs(xL), np.exp(m1 * xL_fit + b1), 'r:', lw=1.6,
+            ax.plot(np.abs(xL)/resolution, np.exp(m1 * xL_fit + b1), 'r:', lw=1.6,
                     label=f"left fit (all): slope={m1:.3f}")
         if 'right' in fits:
             m2, b2 = fits['right']
-            ax.plot(xR, np.exp(m2 * xR_fit + b2), 'r:', lw=1.6,
+            ax.plot(xR/resolution, np.exp(m2 * xR_fit + b2), 'r:', lw=1.6,
                     label=f"right fit (all): slope={m2:.3f}")
         if 'left' in fits_outer:
             m1o, b1o = fits_outer['left']
-            ax.plot(np.abs(xL), np.exp(m1o * xL_fit + b1o), 'm--', lw=1.6,
+            ax.plot(np.abs(xL)/resolution, np.exp(m1o * xL_fit + b1o), 'm--', lw=1.6,
                     label=f"left fit (outer 4): slope={m1o:.3f}")
         if 'right' in fits_outer:
             m2o, b2o = fits_outer['right']
-            ax.plot(xR, np.exp(m2o * xR_fit + b2o), 'm--', lw=1.6,
+            ax.plot(xR/resolution, np.exp(m2o * xR_fit + b2o), 'm--', lw=1.6,
                     label=f"right fit (outer 4): slope={m2o:.3f}")
         ax.set_xlabel("|Position| (relative to center)")
         out_pdf = "intensityplotnew_loglog.pdf"
     else:
-        ax.plot(x, np.exp(log_amp), color="blue", label="data")
-        if pL.size: ax.plot(xL[pL], np.exp(yL[pL]), 'ro', ms=6, label="left peaks")
-        if pR.size: ax.plot(xR[pR], np.exp(yR[pR]), 'ro', ms=6, label="right peaks")
+        ax.plot(x/resolution, np.exp(log_amp), color="blue", label="data")
+        if pL.size: ax.plot(xL[pL]/resolution, np.exp(yL[pL]), 'ro', ms=6, label="left peaks")
+        if pR.size: ax.plot(xR[pR]/resolution, np.exp(yR[pR]), 'ro', ms=6, label="right peaks")
         if 'left' in fits:
             m1, b1 = fits['left']
-            ax.plot(xL, np.exp(m1 * xL + b1), 'r:', lw=1.6,
+            ax.plot(xL/resolution, np.exp(m1 * xL + b1), 'r:', lw=1.6,
                     label=f"left fit (all): slope={m1:.4f}")
         if 'right' in fits:
             m2, b2 = fits['right']
-            ax.plot(xR, np.exp(m2 * xR + b2), 'r:', lw=1.6,
+            ax.plot(xR/resolution, np.exp(m2 * xR + b2), 'r:', lw=1.6,
                     label=f"right fit (all): slope={m2:.4f}")
         if 'left' in fits_outer:
             m1o, b1o = fits_outer['left']
-            ax.plot(xL, np.exp(m1o * xL + b1o), 'm--', lw=1.6,
+            ax.plot(xL/resolution, np.exp(m1o * xL + b1o), 'm--', lw=1.6,
                     label=f"left fit (outer 4): slope={m1o:.4f}")
         if 'right' in fits_outer:
             m2o, b2o = fits_outer['right']
-            ax.plot(xR, np.exp(m2o * xR + b2o), 'm--', lw=1.6,
+            ax.plot(xR/resolution, np.exp(m2o * xR + b2o), 'm--', lw=1.6,
                     label=f"right fit (outer 4): slope={m2o:.4f}")
         ax.set_xlabel("Position (relative to center)")
         out_pdf = "intensityplotnew.pdf"
 
     ax.set_ylabel("|Ez| field")
+    ax.set_xlim(np.min([*(xR/resolution), *(np.abs(xL)/resolution)]), np.max([*(xR/resolution), *(np.abs(xL)/resolution)]))
     ax.set_title(f"Line cut at z={z0}, y={y0}  ({'log-log' if loglog else 'semi-log'})")
     ax.grid(False)
     ax.legend(loc="best", fontsize=8)
